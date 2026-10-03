@@ -1,0 +1,15 @@
+Package: p3d
+Title: Interactive 3D Visualization of p-Value Surfaces
+Version: 0.0.0.9000
+Authors@R: 
+    person("Ahmet", "Kutuk", , "ahmetkutuk@gmail.com", role = c("aut", "cre"))
+Description: Provides interactive three-dimensional visualization of
+    p-value surfaces for single-sample t-tests. Enables simultaneous
+    exploration of effect size, sample size, and significance level,
+    making the continuous nature of p-values and the moderating effect
+    of sample size visually apparent. Includes both interactive (rgl,
+    plotly) and static (persp) rendering options.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.0
