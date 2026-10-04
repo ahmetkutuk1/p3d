@@ -2,3 +2,4 @@
 
 export(p_curve_2d)
 export(p_surface)
+export(plot_p_surface)
