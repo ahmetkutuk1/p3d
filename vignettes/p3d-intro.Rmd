@@ -1,0 +1,149 @@
+---
+title: "Introduction to p3d"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to p3d}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+library(p3d)
+```
+
+## Introduction
+
+The p-value is a continuous measure of statistical evidence, yet in practice it is often reduced to a binary decision: *p* < 0.05 is "significant", *p* ≥ 0.05 is "not significant". This dichotomous thinking is a major contributor to the reproducibility crisis in science.
+
+The **p3d** package visualizes the p-value of a single-sample t-test as a **three-dimensional surface** over two parameters:
+
+- **Effect size** (*d*, Cohen's *d*)
+- **Sample size** (*n*)
+
+This vignette demonstrates the core functionality of the package.
+
+## The p-value surface
+
+The central function of the package is `p_surface()`. Given a range of effect sizes and sample sizes, it computes the p-value for each combination:
+
+```{r}
+surface <- p_surface(
+  d = seq(-2, 2, 0.1),
+  n = seq(5, 200, 5)
+)
+
+str(surface, max.level = 1)
+```
+
+The result is a list with several components:
+
+- `d`: the vector of effect sizes
+- `n`: the vector of sample sizes
+- `p`: a matrix of p-values (dimensions `length(d)` × `length(n)`)
+- `d_crit`: critical effect sizes at α = 0.05 for each *n*
+- `alpha`: the significance level
+- `grid`: a tidy data frame with all combinations
+
+### Inspecting the results
+
+For example, the p-value at *d* = 0.5, *n* = 30 is:
+
+```{r}
+surface$p[surface$d == 0.5, surface$n == 30]
+```
+
+The critical effect size at *n* = 30 is:
+
+```{r}
+surface$d_crit[surface$n == 30]
+```
+
+This means: with 30 observations, an effect size of at least 0.37 is required for statistical significance at α = 0.05.
+
+## Static 3D visualization
+
+The simplest way to visualize the surface is `plot_p_static()`, which uses base R graphics and has **no external dependencies**:
+
+```{r fig.alt = "Static 3D p-value surface"}
+plot_p_static(surface)
+```
+
+This is ideal for PDF output, journal figures, and printed reports.
+
+## Interactive 3D visualization
+
+For interactive exploration, use `plot_p_surface()` with the `plotly` engine:
+
+```{r eval = FALSE}
+plot_p_surface(surface, engine = "plotly")
+```
+
+Alternatively, the `rgl` engine provides a native R window:
+
+```{r eval = FALSE}
+plot_p_surface(surface, engine = "rgl")
+```
+
+Both engines allow rotation, zooming, and panning.
+
+## 2D comparison
+
+For comparison with existing 2D packages such as `pvaluefunctions`, use `p_curve_2d()`:
+
+```{r}
+curve_30 <- p_curve_2d(d = seq(-2, 2, 0.1), n = 30)
+head(curve_30)
+```
+
+The 2D curve is mathematically equivalent to a slice of the 3D surface at fixed *n*.
+
+## Real-data example
+
+Let's apply `p3d` to a real dataset. The `mtcars` dataset contains fuel consumption (mpg) for 32 automobiles. Suppose we want to test whether the mean mpg is different from 20:
+
+```{r}
+x <- mtcars$mpg
+d_obs <- (mean(x) - 20) / sd(x)
+n_obs <- length(x)
+
+cat("Observed effect size:", round(d_obs, 4), "\n")
+cat("Sample size:", n_obs, "\n")
+```
+
+The p-value for this single observation is:
+
+```{r}
+2 * (1 - pt(abs(d_obs) * sqrt(n_obs), df = n_obs - 1))
+```
+
+By placing this observation on the 3D surface, we can see how the same effect size would behave at different sample sizes:
+
+```{r fig.alt = "Observed effect size on the 3D surface"}
+surface_real <- p_surface(
+  d = seq(-0.5, 0.5, 0.01),
+  n = seq(5, 200, 5)
+)
+
+plot_p_static(surface_real, theta = 30, phi = 20)
+```
+
+## Conclusion
+
+The **p3d** package provides a three-dimensional perspective on the p-value. By visualizing the p-value simultaneously across effect size and sample size, it reveals:
+
+1. The **continuous** nature of the p-value (it is not a binary switch)
+2. The **moderating effect** of sample size on statistical significance
+3. The **interaction** between effect size and sample size
+
+This complements traditional 2D visualizations and helps weaken the dichotomous thinking that plagues statistical practice.
+
+## References
+
+- Helske, J., Helske, S., & Cooper, M. (2021). *Visualizing Hypothesis Tests in Practice*. The R Journal.
+- Cohen, J. (1988). *Statistical Power Analysis for the Behavioral Sciences* (2nd ed.). Lawrence Erlbaum Associates.

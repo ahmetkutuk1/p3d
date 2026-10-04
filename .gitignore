@@ -8,3 +8,6 @@
 ~$*
 *.jpg
 *.png
+inst/doc
+/doc/
+/Meta/
