@@ -49,9 +49,6 @@ p_surface <- function(d, n, alpha = 0.05) {
   if (!is.numeric(d) || !is.numeric(n)) {
     stop("`d` and `n` must be numeric vectors.", call. = FALSE)
   }
-  if (length(d) < 2 || length(n) < 2) {
-    stop("`d` and `n` must each have at least 2 values.", call. = FALSE)
-  }
   if (any(n < 2)) {
     stop("All values of `n` must be >= 2 (t-test requires df >= 1).",
          call. = FALSE)
