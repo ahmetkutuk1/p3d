@@ -59,11 +59,11 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><strong>p3d</strong> is an R package for computing and visualizing the <strong>three-dimensional p-value surface</strong> of a single-sample t-test. It expresses the p-value as a function of both effect size (Cohen’s <em>d</em>) and sample size (<em>n</em>).</p>
+<p><strong>p3d</strong> is an R package for computing and visualizing the <strong>three-dimensional p-value surface</strong> of a single-sample t-test. The p-value is expressed as a function of both effect size (Cohen’s <em>d</em>) and sample size (<em>n</em>).</p>
 <div class="section level2">
 <h2 id="why-p3d">Why p3d?<a class="anchor" aria-label="anchor" href="#why-p3d"></a>
 </h2>
-<p>Traditional p-value visualizations are two-dimensional and show the effect of only one parameter at a time. <strong>p3d</strong> visualizes the p-value simultaneously across effect size and sample size. This answers questions such as:</p>
+<p>Traditional p-value visualizations are two-dimensional and show the effect of only one parameter at a time. <strong>p3d</strong> visualizes the p-value simultaneously across effect size and sample size. It addresses questions such as:</p>
 <ul>
 <li>How does the same effect size (<em>d</em> = 0.5) produce different significance outcomes at <em>n</em> = 10 versus <em>n</em> = 100?</li>
 <li>Why is the p-value a <strong>continuous measure of evidence</strong>, not a fixed threshold?</li>
@@ -144,7 +144,7 @@
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
-<p>The p-value is a continuous measure of evidence, yet in practice it is often reduced to a binary decision: “p &lt; 0.05 is significant, p ≥ 0.05 is not.” This dichotomous thinking is a major contributor to the reproducibility crisis in science.</p>
+<p>The p-value is a continuous measure of evidence, yet in practice it is often reduced to a binary decision: “p &lt; 0.05 is significant, p ≥ 0.05 is not.” This dichotomous thinking contributes to the reproducibility crisis in science.</p>
 <p><strong>p3d</strong> aims to weaken the visual basis of this dichotomous thinking by visualizing the p-value over a two-dimensional parameter space. The significance boundary is a <strong>curve</strong>, not a <strong>point</strong>.</p>
 </div>
 <div class="section level2">

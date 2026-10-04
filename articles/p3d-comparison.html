@@ -73,11 +73,11 @@
 <p>Existing R packages such as <code>pvaluefunctions</code> and
 <code>concurve</code> visualize p-values in <strong>two
 dimensions</strong>. They show how the p-value changes with <strong>one
-parameter</strong> at a time — typically the effect size, given a fixed
+parameter</strong> at a time, typically the effect size, given a fixed
 standard error.</p>
 <p>The <strong>p3d</strong> package extends this to <strong>three
-dimensions</strong>, showing the p-value as a function of <strong>both
-effect size and sample size</strong> simultaneously.</p>
+dimensions</strong>, showing the p-value as a function of
+<strong>both</strong> effect size <strong>and</strong> sample size.</p>
 <p>This vignette compares the two approaches.</p>
 </div>
 <div class="section level2">
@@ -195,8 +195,8 @@ The 2D curve cannot show this — it is fixed at one <em>n</em>.</p>
 <div class="section level2">
 <h2 id="jensens-inequality-two-interpretations-of-the-p-value">Jensen’s inequality: two interpretations of the p-value<a class="anchor" aria-label="anchor" href="#jensens-inequality-two-interpretations-of-the-p-value"></a>
 </h2>
-<p>A subtle but important point: the p-value has <strong>two different
-interpretations</strong>, which the 3D surface helps clarify.</p>
+<p>The p-value has <strong>two different interpretations</strong>, which
+the 3D surface helps clarify.</p>
 <p><strong>Conditional p-value</strong> (fixed <em>d</em>): the p-value
 computed for a <em>specific</em> effect size. This is what
 <code><a href="../reference/p_surface.html">p_surface()</a></code> returns:</p>

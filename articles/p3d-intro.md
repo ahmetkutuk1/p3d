@@ -5,8 +5,7 @@
 The p-value is a continuous measure of statistical evidence, yet in
 practice it is often reduced to a binary decision: *p* \< 0.05 is
 “significant”, *p* ≥ 0.05 is “not significant”. This dichotomous
-thinking is a major contributor to the reproducibility crisis in
-science.
+thinking contributes to the reproducibility crisis in science.
 
 The **p3d** package visualizes the p-value of a single-sample t-test as
 a **three-dimensional surface** over two parameters:
