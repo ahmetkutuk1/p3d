@@ -6,3 +6,5 @@
 .quarto
 *.docx
 ~$*
+*.jpg
+*.png
