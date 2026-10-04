@@ -184,7 +184,10 @@ dichotomous thinking that plagues statistical practice.
 
 ## References
 
-- Helske, J., Helske, S., & Cooper, M. (2021). *Visualizing Hypothesis
-  Tests in Practice*. The R Journal.
+- Helske, J., Helske, S., Cooper, M., Ynnerman, A., & Besançon, L.
+  (2021). Can Visualization Alleviate Dichotomous Thinking? Effects of
+  Visual Representations on the Cliff Effect. *IEEE Transactions on
+  Visualization and Computer Graphics*, 27(8), 3496-3509.
+
 - Cohen, J. (1988). *Statistical Power Analysis for the Behavioral
   Sciences* (2nd ed.). Lawrence Erlbaum Associates.

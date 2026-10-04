@@ -208,8 +208,11 @@ thinking that reduces the p-value to a binary decision.
 
 ## References
 
-- Helske, J., Helske, S., & Cooper, M. (2021). *Visualizing Hypothesis
-  Tests in Practice*. The R Journal.
-- Infanger, D., & Schmidt-Trucksäss, A. (2019). *P value functions: An
+- Helske, J., Helske, S., Cooper, M., Ynnerman, A., & Besançon, L.
+  (2021). Can Visualization Alleviate Dichotomous Thinking? Effects of
+  Visual Representations on the Cliff Effect. *IEEE Transactions on
+  Visualization and Computer Graphics*, 27(8), 3496-3509.
+
+- Infanger, D., & Schmidt-Trucksäss, A. (2019). P value functions: An
   underused method to present research results and to promote
-  quantitative reasoning*. Statistics in Medicine.
+  quantitative reasoning. *Statistics in Medicine*, 38(21), 4189-4197.
