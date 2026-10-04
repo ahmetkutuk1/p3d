@@ -19,9 +19,9 @@ library(p3d)
 
 ## Introduction
 
-Existing R packages such as `pvaluefunctions` and `concurve` visualize p-values in **two dimensions**. They show how the p-value changes with **one parameter** at a time — typically the effect size, given a fixed standard error.
+Existing R packages such as `pvaluefunctions` and `concurve` visualize p-values in **two dimensions**. They show how the p-value changes with **one parameter** at a time, typically the effect size, given a fixed standard error.
 
-The **p3d** package extends this to **three dimensions**, showing the p-value as a function of **both effect size and sample size** simultaneously.
+The **p3d** package extends this to **three dimensions**, showing the p-value as a function of **both** effect size **and** sample size.
 
 This vignette compares the two approaches.
 
@@ -115,7 +115,7 @@ At *n* = 10, the p-value is **above** 0.05 (not significant). At *n* = 30, it is
 
 ## Jensen's inequality: two interpretations of the p-value
 
-A subtle but important point: the p-value has **two different interpretations**, which the 3D surface helps clarify.
+The p-value has **two different interpretations**, which the 3D surface helps clarify.
 
 **Conditional p-value** (fixed *d*): the p-value computed for a *specific* effect size. This is what `p_surface()` returns:
 

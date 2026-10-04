@@ -8,7 +8,7 @@
 * GitHub Actions: ubuntu-latest (R release), macOS-latest (R release), 
   windows-latest (R release)
 
-## R CMD check results
+## Notes
 
 * This is a new release.
 

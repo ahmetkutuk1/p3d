@@ -4,24 +4,24 @@
 
 ### Core functions
 
-* `p_surface()` — Compute the p-value surface of a single-sample
+* `p_surface()`: Compute the p-value surface of a single-sample
   t-test as a function of effect size (*d*) and sample size (*n*).
-* `p_curve_2d()` — Compute a 2D p-value curve for a fixed sample size,
+* `p_curve_2d()`: Compute a 2D p-value curve for a fixed sample size,
   for comparison with existing 2D packages.
 
 ### Visualization
 
-* `plot_p_surface()` — Interactive 3D visualization of the p-value
+* `plot_p_surface()`: Interactive 3D visualization of the p-value
   surface, with engines for `rgl` (native window) and `plotly`
   (HTML widget).
-* `plot_p_static()` — Static 3D perspective plot using base R graphics
+* `plot_p_static()`: Static 3D perspective plot using base R graphics
   (`persp`), with no external dependencies.
 
 ### Documentation
 
-* Vignette `p3d-intro` — Introduction to the package with usage
+* Vignette `p3d-intro`: Introduction to the package with usage
   examples and a real-data application (`mtcars`).
-* Vignette `p3d-comparison` — Comparison of 2D and 3D p-value
+* Vignette `p3d-comparison`: Comparison of 2D and 3D p-value
   visualizations, including the moderating effect of sample size.
 
 ### Testing

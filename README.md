@@ -4,11 +4,11 @@
 [![R-CMD-check](https://github.com/ahmetkutuk1/p3d/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ahmetkutuk1/p3d/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-**p3d** is an R package for computing and visualizing the **three-dimensional p-value surface** of a single-sample t-test. It expresses the p-value as a function of both effect size (Cohen's *d*) and sample size (*n*).
+**p3d** is an R package for computing and visualizing the **three-dimensional p-value surface** of a single-sample t-test. The p-value is expressed as a function of both effect size (Cohen's *d*) and sample size (*n*).
 
 ## Why p3d?
 
-Traditional p-value visualizations are two-dimensional and show the effect of only one parameter at a time. **p3d** visualizes the p-value simultaneously across effect size and sample size. This answers questions such as:
+Traditional p-value visualizations are two-dimensional and show the effect of only one parameter at a time. **p3d** visualizes the p-value simultaneously across effect size and sample size. It addresses questions such as:
 
 - How does the same effect size (*d* = 0.5) produce different significance outcomes at *n* = 10 versus *n* = 100?
 - Why is the p-value a **continuous measure of evidence**, not a fixed threshold?
@@ -67,7 +67,7 @@ $$d_{\text{crit}}(n) = \frac{F^{-1}_{t(n-1)}(1 - \alpha/2)}{\sqrt{n}}$$
 
 ## Motivation
 
-The p-value is a continuous measure of evidence, yet in practice it is often reduced to a binary decision: "p < 0.05 is significant, p ≥ 0.05 is not." This dichotomous thinking is a major contributor to the reproducibility crisis in science.
+The p-value is a continuous measure of evidence, yet in practice it is often reduced to a binary decision: "p < 0.05 is significant, p ≥ 0.05 is not." This dichotomous thinking contributes to the reproducibility crisis in science.
 
 **p3d** aims to weaken the visual basis of this dichotomous thinking by visualizing the p-value over a two-dimensional parameter space. The significance boundary is a **curve**, not a **point**.
 
