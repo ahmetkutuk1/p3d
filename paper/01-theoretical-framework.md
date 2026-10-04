@@ -31,7 +31,7 @@ The magnitude of this difference depends jointly on the effect size $d$ and the 
 | 0.5 | 100 | $2.48 \times 10^{-6}$ | $4.50 \times 10^{-4}$ | 18,018% |
 | 0.8 | 100 | $2.40 \times 10^{-12}$ | $3.68 \times 10^{-8}$ | 1,534,687% |
 
-The relative difference ranges from 17% to more than $1.5 \times 10^6$%, demonstrating that the two interpretations of the p-value are not interchangeable. In the present study, we adopt the *conditional* p-value, which is the convention in power analysis and sample size planning and is consistent with existing R packages such as `pvaluefunctions` and `concurve`. A formal proof of the inequality, based on Jensen's inequality, is provided in Appendix A.
+The relative difference ranges from 17% to more than $1.5 \times 10^6\%$, demonstrating that the two interpretations of the p-value are not interchangeable. In the present study, we adopt the *conditional* p-value, which is the convention in power analysis and sample size planning and is consistent with existing R packages such as `pvaluefunctions` and `concurve`. A formal proof of the inequality, based on Jensen's inequality, is provided in Appendix A.
 
 Appendix A: Mathematical Proof of the Inequality
 We prove that $\mathbb{E}[p(d_{\text{obs}})] \geq p(\mathbb{E}[d_{\text{obs}}])$ for the p-value function
