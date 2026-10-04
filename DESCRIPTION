@@ -1,6 +1,6 @@
 Package: p3d
 Title: Interactive 3D Visualization of p-Value Surfaces
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Ahmet", "Kutuk", , "ahmetkutuk@gmail.com", role = c("aut", "cre"))
 Description: Provides interactive three-dimensional visualization of

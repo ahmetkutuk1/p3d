@@ -1,4 +1,4 @@
-# p3d 0.0.0.9000 (development version)
+# p3d 0.1.0
 
 ## Initial release
 
