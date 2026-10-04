@@ -1,0 +1,40 @@
+url: https://ahmetkutuk1.github.io/p3d/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    intro:
+      text: Get started
+      href: articles/p3d-intro.html
+    articles:
+      text: Articles
+      menu:
+      - text: Introduction to p3d
+        href: articles/p3d-intro.html
+      - text: Comparing 2D and 3D visualizations
+        href: articles/p3d-comparison.html
+
+reference:
+  - title: "Core functions"
+    desc: "Compute p-value surfaces and curves"
+    contents:
+      - p_surface
+      - p_curve_2d
+  - title: "Visualization"
+    desc: "Interactive and static 3D visualizations"
+    contents:
+      - plot_p_surface
+      - plot_p_static
+  - title: "Package documentation"
+    contents:
+      - p3d-package
+
+authors:
+  Ahmet Kutuk:
+    href: https://github.com/ahmetkutuk1

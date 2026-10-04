@@ -12,7 +12,7 @@ Description: Provides interactive three-dimensional visualization of
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/ahmetkutuk1/p3d
+URL: https://github.com/ahmetkutuk1/p3d, https://ahmetkutuk1.github.io/p3d/
 BugReports: https://github.com/ahmetkutuk1/p3d/issues
 Config/roxygen2/version: 8.1.0
 Suggests: 
