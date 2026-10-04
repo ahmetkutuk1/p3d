@@ -3,6 +3,13 @@ url: https://ahmetkutuk1.github.io/p3d/
 template:
   bootstrap: 5
   bootswatch: flatly
+  bslib:
+    base_font:
+      google: "Source Sans Pro"
+    heading_font:
+      google: "Source Sans Pro"
+    code_font:
+      google: "Fira Code"
 
 navbar:
   structure:
