@@ -8,4 +8,27 @@ In this study, we present the p3d package, which models the p-value as a three-d
 - Observe the moderating effect of sample size on the p-value.
 - Recognize that the visual basis of dichotomous thinking is weakened.
 
-Monte Carlo simulations reveal two distinct interpretations of the p-value: (1) the conditional p-value given a fixed effect size, and (2) the expected p-value given a random effect size. Due to Jensen's inequality, these two approaches yield systematically different results (a relative difference of 464%). In this study, the conditional p-value approach, commonly used in power analysis and sample size planning, has been adopted.
+A Monte Carlo simulation study reveals that the p-value admits two distinct interpretations, which we term the *conditional* and the *expected* p-value:
+
+1. **Conditional p-value** (fixed effect size): $p(d, n) = 2\left[1 - F_{t(n-1)}(d\sqrt{n})\right]$
+2. **Expected p-value** (random effect size): $\mathbb{E}[p(d_{\text{obs}}, n)] = \int p(d_{\text{obs}}, n) \, f(d_{\text{obs}} \mid d, n) \, dd_{\text{obs}}$
+
+Due to Jensen's inequality, these two quantities need not coincide. Because the p-value function $p(d)$ is strictly convex in $d$, we have $\mathbb{E}[p(d_{\text{obs}})] \geq p(\mathbb{E}[d_{\text{obs}}])$, with strict inequality whenever $d_{\text{obs}}$ is non-degenerate.
+
+The magnitude of this difference depends jointly on the effect size $d$ and the sample size $n$. Table 1 reports the two p-values and their relative difference for a grid of representative values.
+
+**Table 1.** Conditional and expected p-values for selected combinations of effect size $d$ and sample size $n$. The expected p-value was computed via Monte Carlo simulation with $B = 10{,}000$ replications. The relative difference is defined as $\left| \mathbb{E}[p] - p \right| / p \times 100\%$.
+
+| $d$ | $n$ | Conditional $p$ | Expected $p$ | Relative difference |
+|-----|-----|-----------------|--------------|---------------------|
+| 0.2 | 10  | $5.43 \times 10^{-1}$ | $4.48 \times 10^{-1}$ | 17% |
+| 0.5 | 10  | $1.48 \times 10^{-1}$ | $2.47 \times 10^{-1}$ | 67% |
+| 0.8 | 10  | $3.22 \times 10^{-2}$ | $9.02 \times 10^{-2}$ | 180% |
+| 0.2 | 30  | $2.82 \times 10^{-1}$ | $3.46 \times 10^{-1}$ | 23% |
+| 0.5 | 30  | $1.04 \times 10^{-2}$ | $5.89 \times 10^{-2}$ | 464% |
+| 0.8 | 30  | $1.41 \times 10^{-4}$ | $3.30 \times 10^{-3}$ | 2,242% |
+| 0.2 | 100 | $4.82 \times 10^{-2}$ | $1.47 \times 10^{-1}$ | 205% |
+| 0.5 | 100 | $2.48 \times 10^{-6}$ | $4.50 \times 10^{-4}$ | 18,018% |
+| 0.8 | 100 | $2.40 \times 10^{-12}$ | $3.68 \times 10^{-8}$ | 1,534,687% |
+
+The relative difference ranges from 17% to more than $1.5 \times 10^6$%, demonstrating that the two interpretations of the p-value are not interchangeable. In the present study, we adopt the *conditional* p-value, which is the convention in power analysis and sample size planning and is consistent with existing R packages such as `pvaluefunctions` and `concurve`. A formal proof of the inequality, based on Jensen's inequality, is provided in Appendix A.
