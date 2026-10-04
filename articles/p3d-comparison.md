@@ -1,0 +1,216 @@
+# Comparing 2D and 3D p-Value Visualizations
+
+## Introduction
+
+Existing R packages such as `pvaluefunctions` and `concurve` visualize
+p-values in **two dimensions**. They show how the p-value changes with
+**one parameter** at a time — typically the effect size, given a fixed
+standard error.
+
+The **p3d** package extends this to **three dimensions**, showing the
+p-value as a function of **both effect size and sample size**
+simultaneously.
+
+This vignette compares the two approaches.
+
+## Setup
+
+We will compare a 2D p-value curve (from `pvaluefunctions`) with a 3D
+p-value surface (from `p3d`), using the same scenario:
+
+- Observed effect size: *d* = 0.5
+- Sample size: *n* = 30
+
+## 2D p-value curve
+
+The `pvaluefunctions` package visualizes the p-value as a function of a
+single parameter. First, we need to install it:
+
+``` r
+
+install.packages("pvaluefunctions")
+```
+
+Now we compute the 2D curve:
+
+``` r
+
+library(pvaluefunctions)
+
+conf_dist(
+  estimate = 0.5,
+  stderr = 1 / sqrt(30),
+  df = 29,
+  tstat = 0.5 * sqrt(30),
+  type = "ttest",
+  plot_type = "p_val"
+)
+```
+
+The resulting plot shows the p-value as a function of the estimated
+effect size, with the observed effect size (0.5) in the center. The
+curve is **symmetric** and has a **minimum** at the observed effect
+size.
+
+## 3D p-value surface
+
+The `p3d` package visualizes the p-value as a function of **both**
+effect size and sample size:
+
+``` r
+
+surface <- p_surface(
+  d = seq(-2, 2, 0.1),
+  n = seq(5, 200, 5)
+)
+
+plot_p_static(surface)
+```
+
+![3D p-value
+surface](p3d-comparison_files/figure-html/unnamed-chunk-3-1.png)
+
+The 3D surface reveals structure that the 2D curve cannot:
+
+1.  **The p-value is not symmetric in *n*.** As *n* increases, the
+    surface flattens toward zero for large \|*d*\| and toward one near
+    *d* = 0.
+2.  **The significance boundary is a curve, not a point.** For each *n*,
+    there is a critical effect size *d*\_crit(*n*) above which the
+    p-value falls below 0.05.
+3.  **Sample size moderates the effect of *d*.** At small *n*, only
+    large effects are significant. At large *n*, even small effects
+    become significant.
+
+## Comparing the two views
+
+Let’s place the 2D curve and the 3D surface side by side. The 2D curve
+corresponds to a **slice** of the 3D surface at *n* = 30:
+
+``` r
+
+# 2D curve at n = 30
+curve_30 <- p_curve_2d(d = seq(-2, 2, 0.1), n = 30)
+
+# Plot the 2D curve
+plot(curve_30$d, curve_30$p, type = "l", lwd = 2, col = "darkred",
+     xlab = "Effect size (d)", ylab = "p-value",
+     main = "2D p-value curve (n = 30)")
+abline(h = 0.05, col = "blue", lty = 2)
+grid()
+```
+
+![2D curve vs 3D
+slice](p3d-comparison_files/figure-html/unnamed-chunk-4-1.png)
+
+This 2D curve is mathematically equivalent to the **slice** of the 3D
+surface at *n* = 30. Both give the same p-value at *d* = 0.5:
+
+``` r
+
+curve_30$p[curve_30$d == 0.5]
+#> [1] 0.01043739
+surface$p[surface$d == 0.5, surface$n == 30]
+#> [1] 0.01043739
+```
+
+## What the 2D curve misses
+
+The 2D curve hides the **moderating effect** of sample size. Consider
+the same effect size (*d* = 0.5) at three different sample sizes:
+
+``` r
+
+surface$p[surface$d == 0.5, surface$n == 10]
+#> [1] 0.1483047
+surface$p[surface$d == 0.5, surface$n == 30]
+#> [1] 0.01043739
+surface$p[surface$d == 0.5, surface$n == 100]
+#> [1] 2.481396e-06
+```
+
+At *n* = 10, the p-value is **above** 0.05 (not significant). At *n* =
+30, it is **below** 0.05 (significant). At *n* = 100, it is **far
+below** 0.05 (highly significant).
+
+**This is the moderating effect of sample size.** The same effect size
+produces different conclusions depending on *n*. The 2D curve cannot
+show this — it is fixed at one *n*.
+
+## Jensen’s inequality: two interpretations of the p-value
+
+A subtle but important point: the p-value has **two different
+interpretations**, which the 3D surface helps clarify.
+
+**Conditional p-value** (fixed *d*): the p-value computed for a
+*specific* effect size. This is what
+[`p_surface()`](https://ahmetkutuk1.github.io/p3d/reference/p_surface.md)
+returns:
+
+``` math
+p_{\text{conditional}}(d, n) = 2 \left[ 1 - F_{t(n-1)}(d \sqrt{n}) \right]
+```
+
+For *d* = 0.5, *n* = 30:
+
+``` r
+
+p_surface(d = 0.5, n = 30)$p[1, 1]
+#> [1] 0.01043739
+```
+
+**Expected p-value** (random *d*): the average p-value over all possible
+observed effect sizes:
+
+``` math
+\mathbb{E}[p(d_{\text{obs}}, n)] = \int p(d_{\text{obs}}, n) \cdot f(d_{\text{obs}} \mid d, n) \, dd_{\text{obs}}
+```
+
+For *d* = 0.5, *n* = 30, this is approximately:
+
+``` r
+
+set.seed(42)
+n_sim <- 10000
+n <- 30
+d <- 0.5
+
+p_values <- replicate(n_sim, {
+  x <- rnorm(n, mean = d, sd = 1)
+  t.test(x, mu = 0)$p.value
+})
+
+mean(p_values)
+#> [1] 0.05887669
+```
+
+**The two values differ substantially** (0.0104 vs 0.0589). This is due
+to **Jensen’s inequality**: the p-value is a convex function of *d*, so
+the expected p-value is **larger** than the conditional p-value.
+
+The `p3d` package visualizes the **conditional** p-value, consistent
+with power analysis and existing packages. The **expected** p-value is a
+subject of ongoing research.
+
+## Conclusion
+
+The 2D and 3D visualizations of the p-value are complementary:
+
+- **2D:** Ideal for examining a single scenario in detail
+- **3D:** Ideal for exploring the full parameter space
+
+The 3D surface reveals structure that the 2D curve cannot: the
+moderating effect of sample size, the continuous nature of the
+significance boundary, and the interaction between effect size and
+sample size.
+
+By making these features visible, **p3d** helps weaken the dichotomous
+thinking that reduces the p-value to a binary decision.
+
+## References
+
+- Helske, J., Helske, S., & Cooper, M. (2021). *Visualizing Hypothesis
+  Tests in Practice*. The R Journal.
+- Infanger, D., & Schmidt-Trucksäss, A. (2019). *P value functions: An
+  underused method to present research results and to promote
+  quantitative reasoning*. Statistics in Medicine.
