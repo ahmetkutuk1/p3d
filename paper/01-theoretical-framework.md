@@ -32,3 +32,30 @@ The magnitude of this difference depends jointly on the effect size $d$ and the 
 | 0.8 | 100 | $2.40 \times 10^{-12}$ | $3.68 \times 10^{-8}$ | 1,534,687% |
 
 The relative difference ranges from 17% to more than $1.5 \times 10^6$%, demonstrating that the two interpretations of the p-value are not interchangeable. In the present study, we adopt the *conditional* p-value, which is the convention in power analysis and sample size planning and is consistent with existing R packages such as `pvaluefunctions` and `concurve`. A formal proof of the inequality, based on Jensen's inequality, is provided in Appendix A.
+
+Appendix A: Mathematical Proof of the Inequality
+We prove that $\mathbb{E}[p(d_{\text{obs}})] \geq p(\mathbb{E}[d_{\text{obs}}])$ for the p-value function
+
+$$p(d) = 2\left[1 - F_{t(n-1)}(d\sqrt{n})\right]$$
+
+where $F_{t(n-1)}$ is the cumulative distribution function of the t-distribution with $n - 1$ degrees of freedom.
+
+**Step 1: Convexity of $p(d)$.**
+
+The function $p(d)$ is the composition of the linear function $u \mapsto d\sqrt{n}$ and the strictly decreasing function $v \mapsto 2[1 - F_{t(n-1)}(v)]$. The latter is strictly convex because the t-distribution is symmetric and unimodal. Therefore, $p(d)$ is strictly convex in $d$.
+
+**Step 2: Jensen's inequality.**
+
+For any random variable $D$ with finite expectation and any convex function $\varphi$,
+
+$$\varphi(\mathbb{E}[D]) \leq \mathbb{E}[\varphi(D)]$$
+
+Applying this with $\varphi = p$ and $D = d_{\text{obs}}$ yields
+
+$$p(\mathbb{E}[d_{\text{obs}}]) \leq \mathbb{E}[p(d_{\text{obs}})]$$
+
+**Step 3: Strictness.**
+
+Equality holds if and only if $D$ is constant or $p(\cdot)$ is linear on the support of $D$. Since $p(\cdot)$ is strictly convex, equality holds only when $d_{\text{obs}}$ is degenerate (i.e., when the effect size is known with certainty). For a non-degenerate sampling distribution of $d_{\text{obs}}$, the inequality is strict.
+
+$\square$
