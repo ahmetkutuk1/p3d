@@ -7,12 +7,15 @@ Description: Provides interactive three-dimensional visualization of
     p-value surfaces for single-sample t-tests. Enables simultaneous
     exploration of effect size, sample size, and significance level,
     making the continuous nature of p-values and the moderating effect
-    of sample size visually apparent. Includes both interactive (rgl,
-    plotly) and static (persp) rendering options.
+    of sample size visually apparent. Includes both interactive ('rgl',
+    'plotly') and static (persp()) rendering options. The p-value
+    surface is based on the approach of Infanger and Schmidt-Trucksäss
+    (2019) <doi:10.1002/sim.8293>.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/ahmetkutuk1/p3d, https://ahmetkutuk1.github.io/p3d/
+URL: https://github.com/ahmetkutuk1/p3d,
+    https://ahmetkutuk1.github.io/p3d/
 BugReports: https://github.com/ahmetkutuk1/p3d/issues
 Config/roxygen2/version: 8.1.0
 Suggests: 
